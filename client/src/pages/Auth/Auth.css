@@ -1,0 +1,35 @@
+.Auth-header{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+}
+
+.Auth-goback{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.Auth-header h2{
+    font-size: 35px;
+}
+
+.Auth-header p{
+    font-weight: 200;
+}
+
+.Auth-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Auth-container{
+    width: 400px;
+    padding: 10px;
+    padding-inline: 20px;
+}
+
