@@ -1,0 +1,54 @@
+.User-header{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+}
+
+.User-goback{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.User-header h2{
+    font-size: 35px;
+}
+
+.User-header p{
+    font-weight: 200;
+}
+
+.User-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.User-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.CartScan-container{
+    padding: 10px;
+    padding-inline: 30px;
+}
+
+.Cart-itemsContainer{
+    width: 400px;
+    border: 2px solid black;
+    margin-block: 15px;
+    padding-block: 10px;
+    padding-inline: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+

@@ -3,9 +3,9 @@ import Login from './pages/Auth/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Register from './pages/Auth/Register';
-import UserHome from './pages/UserHome/UserHome';
-import Scan from './pages/UserHome/Scan';
-import Cart from './pages/UserHome/Cart';
+import UserHome from './pages/User/UserHome';
+import Scan from './pages/User/Scan';
+import Cart from './pages/User/Cart';
 
 export default function App() {
   return (

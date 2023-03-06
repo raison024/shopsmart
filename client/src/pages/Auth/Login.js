@@ -7,23 +7,13 @@ import Axios from 'axios'
 function Login() {
 
 const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
 const [loginStatus, setloginStatus] = useState("");
 
-// const [password,setPassword] = useState("");
-// const [user,setUser] = useState({
-//   name:""
-// })
-// const handleChange = e =>{
-// const {name,value} = e.target
-// setUser({
-// ...user,//spread operator 
-// [name]:value
-// })
-// }
 const navigate = useNavigate();
 
 const login = () => {
-Axios.post('http://localhost:3002/api/loginuser',{email:email})
+Axios.post('http://localhost:3002/api/loginuser',{email:email, password: password})
 .then((response) => {
   
   if(response.data.message) {
@@ -48,7 +38,11 @@ Axios.post('http://localhost:3002/api/loginuser',{email:email})
             setEmail(e.target.value);
           }} 
         />
-        <TextField id="Auth-input2" label="Password" variant="outlined" fullWidth margin='normal' size='small' type='password' />
+        <TextField id="Auth-input2" name="password" label="Password" 
+          variant="outlined" fullWidth margin='normal' size='small' 
+          type='password' onChange={(e) => {
+            setPassword(e.target.value);
+          }}/>
         <Button variant='contained' 
           style={{textTransform:'none', marginBlock: '15px'}} 
           fullWidth onClick={login}>Proceed</Button>

@@ -44,7 +44,8 @@ db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)",[email,
 //Route to login
 app.post('/api/loginuser', (req,res)=> {
     const email = req.body.email;
-    db.query("SELECT * FROM customer where c_name = ?",[email], (err,result)=>{
+    const password = req.body.password;
+    db.query("SELECT * FROM customer where c_name = ? and c_pass = ?",[email, password], (err,result)=>{
         if(err) {
             res.send({ err:err });
         }

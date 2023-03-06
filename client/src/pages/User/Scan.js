@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
+import './User.css'
 import { QrReader } from 'react-qr-reader'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import BackButton from '../../components/BackButton/BackButton';
   
 const Scan = (props) => {
   const [data, setData] = useState('No Result');
@@ -8,6 +10,9 @@ const Scan = (props) => {
 
   return (
     <div className="App-header">
+      <Link to="/cart">
+        <BackButton />
+      </Link>
       <h3>Virtual Cart</h3>
       <div style={{ width: '200px' }}>
         <QrReader
