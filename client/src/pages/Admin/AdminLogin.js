@@ -13,13 +13,14 @@ function AdminLogin() {
   const navigate = useNavigate();
 
   const adminLogin = () => {
+    console.log(email,password)
     Axios.post('http://localhost:3002/api/loginadmin',{email:email, password: password})
     .then((response) => {
       
       if(response.data.message) {
         setloginStatus(response.data.message)
       } else {
-        navigate("/home");
+        navigate("/adminhome");
       }
     
       console.log(response);
@@ -42,10 +43,12 @@ function AdminLogin() {
       <TextField id="AdminLogin-input2" name="password" label="Password" 
           variant="outlined" fullWidth margin='normal' size='small' 
           type='password' onChange={(e) => {
-            setPassword(e.target.value);}}/>
-                    <Button variant='contained' 
+            setPassword(e.target.value);}} />
+            
+      <Button variant='contained' 
           style={{textTransform:'none', marginBlock: '15px'}} 
-          fullWidth onClick={adminLogin}>Proceed</Button>
+          fullWidth onClick={adminLogin}>Proceed</Button> 
+         <h1>{loginStatus}</h1>
       </form>
     </div>
   )

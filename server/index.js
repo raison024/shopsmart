@@ -1,3 +1,4 @@
+
 const express = require('express');
 const db = require('./config')
 const cors = require('cors')
@@ -6,6 +7,9 @@ const app = express();
 const  PORT = 3002;
 app.use(cors());
 app.use(express.json())
+
+// const admin = require('./admin');
+// app.use('/api/loginadmin', admin.adminLogin);
 
 // Route to get all posts
 app.get("/api/get", (req,res)=>{
@@ -33,6 +37,7 @@ app.post('/api/createuser', (req,res)=> {
 
 const email = req.body.email;
 const password = req.body.password;
+ res.send(email)
 
 db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)",[email,password], (err,result)=>{
    if(err) {
@@ -41,23 +46,54 @@ db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)",[email,
    console.log(result)
 });   })
 
+
+
 //Route to login
 app.post('/api/loginuser', (req,res)=> {
     const email = req.body.email;
     const password = req.body.password;
-    db.query("SELECT * FROM customer where c_name = ? and c_pass = ?",[email, password], (err,result)=>{
+    console.log(req.body)
+    db.query("SELECT * FROM customers where cemail = ? and cpass = ?",[email, password], (err,result)=>{
         if(err) {
+            console.log(err)
             res.send({ err:err });
         }
 
         if(result.length>0) {
+            // console.log(result)
             res.send(result);
         }
         else {
             res.send({ message: "Wrong Email/Password Combination!" });
         }
+        // console.log(result)
     })
+
 })
+
+//Route to admin login
+app.post('/api/loginadmin', (req,res)=> {
+    const email = req.body.email;
+    const password = req.body.password;
+    db.query("SELECT * FROM admin where email = ? and password = ?",[email, password], (err,result)=>{
+        if(err) {
+            console.log(err)
+            res.send({ err:err });
+        }
+
+        if(result.length>0) {
+            // console.log(result)
+            res.send(result);
+        }
+        else {
+            res.send({ message: "Wrong Email/Password Combination!" });
+        }
+        // console.log(result)
+    })
+
+})
+
+
 
 // Route to like a post
 app.post('/api/like/:id',(req,res)=>{
@@ -81,5 +117,5 @@ console.log(err)
         } }) })
 
 app.listen(PORT, ()=>{
-    console.log(`Server is running on ${PORT}`)
+    console.log(`Server is running on http://localhost:${PORT}`)
 })

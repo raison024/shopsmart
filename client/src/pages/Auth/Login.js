@@ -51,7 +51,7 @@ Axios.post('http://localhost:3002/api/loginuser',{email:email, password: passwor
           <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Sign Up</Button>
         </Link>
       </form>
-      <Link to="/adminhome">Sign in as admin</Link>
+      <Link to="/adminlogin">Sign in as admin</Link>
       <h1>{loginStatus}</h1>
     </div>
     
