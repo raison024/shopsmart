@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, FormControlLabel, Checkbox } from '@mui/material'
 import './Auth.css'
 import { Link, useNavigate } from 'react-router-dom'
 import Axios from 'axios'
+
 
 function Login() {
 
@@ -39,17 +40,25 @@ Axios.post('http://localhost:3002/api/loginuser',{email:email, password: passwor
           }} 
         />
         <TextField id="Auth-input2" name="password" label="Password" 
-          variant="outlined" fullWidth margin='normal' size='small' 
+          variant="outlined" fullWidth margin='normal' size='small'
           type='password' onChange={(e) => {
             setPassword(e.target.value);
           }}/>
+        
+        <div className='Auth-row' style={{justifyContent: 'space-between', width: '100%'}}>
+          <FormControlLabel control={<Checkbox defaultChecked />} label="Keep me signed in" />
+          <a>Forgot Password?</a>
+        </div>
+        
+        
         <Button variant='contained' 
-          style={{textTransform:'none', marginBlock: '15px'}} 
-          fullWidth onClick={login}>Proceed</Button>
-        <h4>Are you a new user?</h4>
-        <Link to="/register" style={{width: '100%', margin: '0'}}>
-          <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Sign Up</Button>
-        </Link>
+          style={{textTransform:'none', marginBlock: '15px', borderRadius: '50px', paddingBlock: '10px', }} 
+          fullWidth onClick={login}>Login</Button>
+        <div className='Auth-row'>
+          <p>Are you a new user?</p>
+          <Link to="/register" style={{margin: '2px'}}>Sign up</Link>
+        </div>
+        <Link to="/admin">Admin?</Link>
       </form>
       <h1>{loginStatus}</h1>
     </div>

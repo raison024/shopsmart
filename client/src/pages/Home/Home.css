@@ -33,6 +33,30 @@
     font-weight: 700;
 }
 
+.Homepage1-container{
+    height: 100%;
+    width: 50%;
+    border-radius: 0 0 0 80px;
+}
+
+.Homepage2-container{
+    height: 80%;
+    width: 30%;
+    align-items: flex-start;
+    justify-content: center;
+    /* background-color: aqua; */
+    margin-inline: 30px;
+}
+
+.Home-step{
+    padding: 5px;
+    padding-inline: 20px;
+    border-radius: 50px;
+    background-color: black;
+    color: white;
+    margin-right: 10px;
+}
+
 .Home-scrolldown{
     padding: 10px;
     position: absolute;

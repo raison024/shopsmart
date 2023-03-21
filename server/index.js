@@ -16,30 +16,34 @@ db.query("SELECT * FROM posts", (err,result)=>{
 res.send(result)
 });   });
 
-// Route to get one post
-app.get("/api/getFromId/:id", (req,res)=>{
-
-const id = req.params.id;
- db.query("SELECT * FROM posts WHERE id = ?", id, 
- (err,result)=>{
-    if(err) {
-    console.log(err)
-    } 
-    res.send(result)
-    });   });
-
 // Route for creating a user
 app.post('/api/createuser', (req,res)=> {
 
-const email = req.body.email;
-const password = req.body.password;
+    const email = req.body.email;
+    const password = req.body.password;
+    
+    db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)",[email,password], (err,result)=>{
+       if(err) {
+       console.log(err)
+       } 
+       console.log(result)
+    });   })
 
-db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)",[email,password], (err,result)=>{
-   if(err) {
-   console.log(err)
-   } 
-   console.log(result)
-});   })
+// Route to check product for cart
+app.post('/api/getname', (req,res)=>{
+    const name = req.body.name;
+    db.query("SELECT * FROM product where pname = ?",[name], (err,result)=>{
+    if(err) {
+        res.send({ err:err });
+    } 
+    if(result.length>0) {
+        res.send(result);   
+        console.log("Success!!!!");
+    }
+    else {
+        res.send({ message: "Product not recognized!" });
+    }
+    });   });
 
 //Route to login
 app.post('/api/loginuser', (req,res)=> {

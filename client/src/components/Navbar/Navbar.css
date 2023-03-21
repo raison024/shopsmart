@@ -1,20 +1,28 @@
 .Navbar{
     height: 10vh;
-    width: 100%;
+    width: 80%;
     position: absolute;
     top: 0;
-    left: 0;
+    align-self: center;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    /* background-color: rgba(0, 0, 0, 0.6); */
 }
 
+.Navbar-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;}
+
 .Navbar-linkscontainer{
-    padding: 10px;
+    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 30px;
 }
 
 a{
@@ -26,6 +34,6 @@ a{
 
 .Navbar-logo{
     font-size: 20px;
-    margin: 10px;
+    margin-right: 30px;
     font-weight: bold;
 }
