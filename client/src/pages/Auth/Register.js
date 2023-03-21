@@ -54,15 +54,7 @@ function Register() {
             <label class="btn btn-secondary" for="option3">Other</label>
           </div>
 
-          <TextField
-        id="date"
-        label="Birthday"
-        type="date"
-        defaultValue="2023-03-18"
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+          <TextField id="date" label="Birthday" type="date" defaultValue="2023-03-18" InputLabelProps={{ shrink: true,}}/>
         
           <TextField id="Auth-input" label="Email" 
             variant="outlined" fullWidth margin='normal' size='small' 
