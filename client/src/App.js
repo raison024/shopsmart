@@ -6,6 +6,7 @@ import Register from './pages/Auth/Register';
 import UserHome from './pages/User/UserHome';
 import Scan from './pages/User/Scan';
 import Cart from './pages/User/Cart';
+import Admin from './pages/Admin/Admin';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/home" element={<UserHome />} />
         <Route path="/scan" element={<Scan />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
