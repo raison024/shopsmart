@@ -44,8 +44,10 @@
 }
 
 .User-grid{
+    width: 100%;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
+    grid-gap: 29px;
 }
 
 .User-generate{
@@ -58,7 +60,20 @@
     width: 400px;
     padding: 10px;
     padding-inline: 30px;   
+    /* background-color: lightgrey; */
+}   
+
+.Cart-itemscroll{
+    width: 100%;
+    height: 50vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+
+.Cart-itemscroll::-webkit-scrollbar {
+    display: none;
+  }
 
 .Cart-itemsContainer{
     height: 50px;
@@ -70,6 +85,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background-color: aqua;
 }
 
 .Cart-bottomsheet{
@@ -89,4 +105,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding-inline: 10px;
+    gap: 5px;
+}
+
+.Cart-fab{
+    margin: 0px;
 }
