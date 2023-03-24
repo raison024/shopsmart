@@ -16,22 +16,22 @@ export const SideBarData=[
     {
         title : "Stores",
         icon : <StoreIcon />,
-        link : "/adminhome/stores"
+        link : "/admin_stores"
     },
     {
         title : "Products",
         icon : <InventoryIcon />,
-        link : "/products"
+        link : "/admin_products"
     },
     {
         title : "Customers",
         icon : <PersonIcon />,
-        link : "/customers"
+        link : "/admin_customers"
     },
     {
         title : "Payments",
         icon : <PaymentsIcon />,
-        link : "/payments"
+        link : "/admin_payments"
     }
 
 ]

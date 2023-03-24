@@ -5,6 +5,7 @@ import { SideBarData } from './SideBarData'
 function SideBar() {
   return (
     <div className='SideBar'>
+      <h3 style={{color: 'white', marginBlock: '30px'}}>Admin Dashboard</h3>
         <ul className='SideBarList'>
             {SideBarData.map((val,key)=>{
                 return(
