@@ -6,6 +6,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import CategoryIcon from '@mui/icons-material/Category';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export const SideBarData=[
     {
@@ -17,6 +19,10 @@ export const SideBarData=[
         title : "Stores",
         icon : <StoreIcon />,
         link : "/admin_stores"
+    },{
+        title : "Categories",
+        icon : <CategoryIcon />,
+        link : "/admin_category"
     },
     {
         title : "Products",
@@ -32,6 +38,10 @@ export const SideBarData=[
         title : "Payments",
         icon : <PaymentsIcon />,
         link : "/admin_payments"
+    },{
+        title : "Logout",
+        icon : <LogoutIcon />,
+        link : "/adminlogin"
     }
 
 ]

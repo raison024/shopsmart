@@ -13,6 +13,8 @@ import Products from '../src/components/Admin SideBar/Products'
 import Customers from '../src/components/Admin SideBar/Customers'
 import Payments from '../src/components/Admin SideBar/Payments'
 import AddProduct from './components/Admin SideBar/AddProduct';
+import UpdateProduct from './components/Admin SideBar/UpdateProduct';
+import Categories from './components/Admin SideBar/Categories';
 
 
 
@@ -33,8 +35,11 @@ export default function App() {
         <Route exact path="/admin_stores" element={<Stores />} />
         <Route exact path="/admin_products" element={<Products />} />
         <Route exact path="/admin_products/add" element={<AddProduct />} />
+        <Route exact path="/admin_products/update/:pid" element={<UpdateProduct />} />
         <Route exact path="/admin_customers" element={<Customers />} />
         <Route exact path="/admin_payments" element={<Payments />} />
+        <Route exact path="/admin_category" element={<Categories/>} />
+
 
 
       </Routes>
