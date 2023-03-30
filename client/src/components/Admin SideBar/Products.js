@@ -32,13 +32,13 @@ function Products() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [img, setImg] = useState(["https://media.s-bol.com/JQ7M9lvwww59/28285Zj/545x1200.jpg"])
+  const [img, setImg] = useState([])
 
   const [product, setProduct] = useState([])
 
   useEffect(() => {
     Axios.get('http://localhost:3002/api/get_product')
-      .then(res => setProduct(res.data))
+      .then((res) => (setProduct(res.data)))
       .catch(err => console.log(err))
   }, []);
 
@@ -61,8 +61,9 @@ function Products() {
     navigate(`/admin_products/update/${pid}`)
   }
   function handleImg(pimg){
-    console.log(img);
-    setImg(pimg);
+    console.log("Image address : " + pimg);
+    setImg(pimg.toString('utf8'));
+    console.log("After Image address : " +img);
     handleOpen();
   }
   // function handlePid () {
@@ -112,6 +113,7 @@ function Products() {
                     <td>{data.price}</td>
                     <td>{data.pdesc}</td>
                     <td>{data.STOCKS}</td>
+                    {/* <td>{data.pimg.toString('utf8')}</td> */}
                     <td className='d-flex justify-content-between'>
                       {/* <button className='btn btn-success'>read</button> */}
                       <button className='btn' onClick={()=>{handleImg(data.pimg)}}><RemoveRedEyeOutlinedIcon /></button>
@@ -123,7 +125,7 @@ function Products() {
                       >
                         <Box sx={style}>
                         {
-                        img && <img src="https://m.media-amazon.com/images/I/51DYRgt8QEL._SX522_.jpg" style={{ maxWidth: '100%', maxHeight: '100%' }} alt="Display Image" />}
+                        img && <img src={img} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="Display Image" />}
                         </Box>
                       </Modal>
                       <button className='btn' onClick={() => gotoupdate(data.pid)}><EditIcon /></button>

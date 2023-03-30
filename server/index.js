@@ -159,6 +159,9 @@ app.get('/api/get_product', (req, res) => {
         if (err)
             throw (err)
         else {
+            for(let i=0; i<result.length; i++){
+                result[i].pimg = result[i].pimg.toString('utf8')
+            }
             console.log(result)
             res.send(result)
         }
@@ -175,6 +178,7 @@ app.post('/api/deleteprod', (req, res) => {
             console.log(err)
         }
         else {
+
             res.send(result)
         }
     })
