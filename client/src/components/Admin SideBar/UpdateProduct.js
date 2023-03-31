@@ -17,7 +17,7 @@ function UpdateProduct() {
         // console.log(product)
     })
     .catch(err => console.log(err))
-  })
+  }, [])
 
   //  const navigate = useNavigate();
 
