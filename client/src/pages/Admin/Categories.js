@@ -1,4 +1,4 @@
-import SideBar from './SideBar'
+import SideBar from '../../../src/components/Admin SideBar/SideBar'
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
@@ -6,10 +6,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import './Categories.css'
+import './Stores.css'
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import Axios from 'axios'
 
 
@@ -23,7 +23,7 @@ function Categories() {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '0px',
     boxShadow: 24,
     p: 4,
   };
@@ -91,8 +91,10 @@ function Categories() {
   const navigate = useNavigate();
 
   return (
+    <div className='Admin'>
+    <SideBar />
     <div className="AdminStores-container">
-      <SideBar />
+      
       <div className='Categories-main'>
         <div>
           <Button onClick={handleOpen} variant="contained" className='Categories-btn' style={{ backgroundColor: 'rgb(21, 101, 192)' }} >Add Category</Button>
@@ -141,6 +143,7 @@ function Categories() {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   )
 }

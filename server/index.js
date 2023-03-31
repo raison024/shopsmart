@@ -304,6 +304,20 @@ app.get('/api/read_payments',(req,res)=>{
     })
 })
 
+//Read Feedbacks
+app.get('/api/read_feedbacks',(req,res)=>{
+    const feedq = 'SELECT * FROM FEEDBACK'
+    db.query(feedq,(err,result)=>{
+        if(err)
+          throw err
+        else{
+            res.status(200)
+            console.log(result)
+            res.send(result)
+        }
+    })
+})
+
 // Route to delete a post
 app.delete('/api/delete/:id', (req, res) => {
     const id = req.params.id;

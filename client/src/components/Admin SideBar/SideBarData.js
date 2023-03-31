@@ -8,6 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CategoryIcon from '@mui/icons-material/Category';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ForumIcon from '@mui/icons-material/Forum';
 
 export const SideBarData=[
     {
@@ -38,6 +39,11 @@ export const SideBarData=[
         title : "Payments",
         icon : <PaymentsIcon />,
         link : "/admin_payments"
+    },
+    {
+        title : "Feedbacks",
+        icon : <ForumIcon />,
+        link : "/admin_feedbacks"
     },{
         title : "Logout",
         icon : <LogoutIcon />,

@@ -1,19 +1,17 @@
 import React from 'react'
-import './AdminHome.css'
-import { Routes, Route } from 'react-router-dom';
+import './Stores.css'
 
 import SideBar from '../../components/Admin SideBar/SideBar'
-import Stores from '../../components/Admin SideBar/Stores.js'
-import Products from '../../components/Admin SideBar/Products'
-import  Customers  from '../../components/Admin SideBar/Customers'
-import Payments  from '../../components/Admin SideBar/Payments'
+
 
 function AdminHome() {
   return (
-    <div className='admin-home'>
+    <div className='Admin'>
       <SideBar />
-      <div className='admin-content'>
-        <p>hello</p>
+      <div className='AdminStores-container'>
+        <div className='Home_image'>
+        {/* <img src='https://cdn.dribbble.com/users/527152/screenshots/3980452/attachments/910708/maintenance_page_2x.png'></img> */}
+        </div>      
       </div>
     </div>
   )

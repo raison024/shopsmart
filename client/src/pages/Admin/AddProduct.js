@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import SideBar from './SideBar'
-import './AddProduct.css'
+import SideBar from '../../components/Admin SideBar/SideBar'
+import './Stores.css'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 
@@ -63,11 +63,11 @@ function AddProduct() {
 
   return (
 
-    <div class="AdminProducts-AddProduct-container">
+    <div className="Admin">
       <SideBar />
-      <div className='container'>
+      <div className='AdminStores-container'>
         {/* <NavLink to='/admin_products'>Hey</NavLink> */}
-        <form>
+        <form className='prodForm'>
           <div className="row">
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputEmail1">Product Name</label>

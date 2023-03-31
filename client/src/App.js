@@ -8,13 +8,14 @@ import Scan from './pages/User/Scan';
 import Cart from './pages/User/Cart';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminHome  from './pages/Admin/AdminHome';
-import Stores from '../src/components/Admin SideBar/Stores'
-import Products from '../src/components/Admin SideBar/Products'
-import Customers from '../src/components/Admin SideBar/Customers'
-import Payments from '../src/components/Admin SideBar/Payments'
-import AddProduct from './components/Admin SideBar/AddProduct';
-import UpdateProduct from './components/Admin SideBar/UpdateProduct';
-import Categories from './components/Admin SideBar/Categories';
+import Stores from '../src/pages/Admin/Stores'
+import Products from './pages/Admin/Products'
+import Customers from './pages/Admin/Customers'
+import Payments from './pages/Admin/Payments'
+import AddProduct from './pages/Admin/AddProduct';
+import UpdateProduct from './pages/Admin/UpdateProduct';
+import Categories from '../src/pages/Admin/Categories';
+import Feedbacks from './pages/Admin/Feedback';
 
 
 
@@ -39,9 +40,8 @@ export default function App() {
         <Route exact path="/admin_customers" element={<Customers />} />
         <Route exact path="/admin_payments" element={<Payments />} />
         <Route exact path="/admin_category" element={<Categories/>} />
-
-
-
+        <Route exact path="/admin_feedbacks" element={<Feedbacks/>} />
+    
       </Routes>
     </BrowserRouter>
   );

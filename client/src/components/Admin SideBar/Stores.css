@@ -1,7 +1,0 @@
-.AdminStores-container {  
-    display: grid; 
-    grid-template-columns: 1fr 4.5fr; 
-    gap: 0px 0px; 
-    background-color: #fafafa;
-  }
-  
