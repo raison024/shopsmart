@@ -1,27 +1,30 @@
-
-import React, { useState, useEffect } from 'react'
-import SideBar from '../../components/Admin SideBar/SideBar'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min'
-import './Stores.css'
+import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
+import SideBar from '../../components/Admin SideBar/SideBar';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './Stores.css';
 import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import Axios from 'axios'
-
+import Axios from 'axios';
 
 function Customers() {
-
-  const [customers, setCustomers] = useState([])
+  const [customers, setCustomers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 1; // Number of items to show per page
 
   useEffect(() => {
     Axios.get('http://localhost:3002/api/read_customers')
       .then(res => {
-        console.log(res)
-        setCustomers(res.data)
+        console.log(res);
+        setCustomers(res.data);
       })
-      .catch(err => console.log(err))
-    console.log("Testing: " + customers)
+      .catch(err => console.log(err));
   }, []);
+
+  function handlePageChange({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
 
   function handleDelete(cid) {
     console.log("Customer id : " + cid)
@@ -33,13 +36,14 @@ function Customers() {
       .catch(err => console.log(err));
   }
 
+  const offset = currentPage * itemsPerPage;
+  const currentPageItems = customers.slice(offset, offset + itemsPerPage);
+
   return (
     <div className='Admin'>
-    <SideBar />
-    <div class="AdminStores-container">
-      
+      <SideBar />
+      <div class="AdminStores-container">
         <div className='Customers-right mt-4'>
-
           <table className="table table-hover mt-3 table-bordered ">
             <thead>
               <tr className='table-dark'>
@@ -53,17 +57,7 @@ function Customers() {
               </tr>
             </thead>
             <tbody>
-              {/* <tr>
-              <th scope="row">100</th>
-              <td>Raymond Shirt</td>
-              <td>121</td>
-              <td>1230</td>
-              <td>Good!</td>
-              <td>4</td>
-
-
-            </tr> */}
-              {customers.map((customer) => {
+              {currentPageItems.map((customer) => {
                 const dob = new Date(customer.dob);
                 const formattedDate = dob.toLocaleDateString();
 
@@ -76,23 +70,26 @@ function Customers() {
                     <td>{customer.gender}</td>
                     <td>{formattedDate}</td>
                     <td className='d-flex justify-content-between'>
-                      {/* <button className='btn btn-success'>read</button> */}
-                      <button className='btn'><PageviewOutlinedIcon/></button>
-                      <button className='btn' onClick={() => handleDelete(customer.cid)}><DeleteIcon/></button>
+                      <button className='btn'><PageviewOutlinedIcon /></button>
+                      <button className='btn' onClick={() => handleDelete(customer.cid)}><DeleteIcon /></button>
                     </td>
                   </tr>
                 );
               })}
-
-
             </tbody>
           </table>
+          <ReactPaginate
+            pageCount={Math.ceil(customers.length / itemsPerPage)}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageChange}
+            containerClassName={'pagination'}
+            activeClassName={'active'}
+          />
         </div>
+      </div>
     </div>
-    </div>
-  
-)}
+  )
+}
 
-export default Customers
-
-
+export default Customers;

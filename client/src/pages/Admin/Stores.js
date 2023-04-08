@@ -17,11 +17,11 @@ function Stores() {
 <SideBar/>
       <div className="AdminStores-container">
       {!isMapLoaded && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}  style={{position: 'relative', top: '45%'}}>
             <CircularProgress />
           </Box>
         )}
-      <iframe src="https://my.atlistmaps.com/map/a0ca7953-72be-4c91-893f-405a7fbc8fe7?share=true" allow="geolocation 'self' https://my.atlistmaps.com" width="70%" height="70%" frameborder="0" scrolling="no" allowfullscreen onLoad={handleMapLoad}></iframe>
+      <iframe src="https://my.atlistmaps.com/map/a0ca7953-72be-4c91-893f-405a7fbc8fe7?share=true" allow="geolocation 'self' https://my.atlistmaps.com" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen onLoad={handleMapLoad}></iframe>
       </div>
 
     </div>

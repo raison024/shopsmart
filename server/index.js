@@ -117,21 +117,6 @@ app.post('/api/add_product', (req, res) => {
     const pdesc = req.body.pdesc;
     const pimg = req.body.pimg;
     const pstock = req.body.pstock;
-
-    // const cat_q = 'INSERT INTO CATEGORY VALUES (NULL,"' + cat_name + '")'
-    // db.query(cat_q, (err, result) => {
-    //     if (err) {
-    //         console.log(err)
-    //         res.send({ err: err });
-    //     }
-    //     else {
-    //         console.log(result)
-    //         if (result.length > 0) {
-    //             // console.log(result)
-    //             res.send(result);
-    //         }
-    //     }
-    // })
     const cat_id_q = 'SELECT cat_id from CATEGORY where cat_name="' + cat_name + '"';
     let temp = 0;
     db.query(cat_id_q, (err, result) => {
@@ -286,9 +271,39 @@ app.post('/api/delete_categories',(req,res)=>{
 
 
 
-//Update Products - update
-app.put('/api/submit_update_product/:pid',(req,res)=>{
+// //Update Products - update
+app.post('/api/submit_update_product/:pid',(req,res)=>{
+
+    const pid = req.body.pid
+    const pname = req.body.pname
+    const cat_name = req.body.cat_name
+    const price = req.body.price
+    const STOCKS = req.body.STOCKS
+    const pimg = req.body.pimg
+    const pdesc = req.body.pdesc
+
+    console.log("Json : " + req.body.STOCKS)
+    // res.send("Category : " +cat_name)
+    const catq ="Select cat_id  from category where cat_name = \'"  + cat_name +"\'"
+    var cat_id=0
     
+    
+    db.query(catq,(err,result)=>{
+        if(err)
+        console.log(err)
+        else{
+            cat_id=result[0].cat_id
+            const updateq = 'update products set pname = \"' + pname + '\",cat_id = '+cat_id+', price = ' + price + ' , pdesc = \"' + pdesc + '\",pimg =\" ' + pimg + "\",stocks = " +STOCKS + ' where pid = ' + pid
+            db.query(updateq,(err,result)=>{
+                if(err)
+                  console.log(err)
+                else{
+                    res.send(result)
+                }
+            })
+        }
+    })
+
 })
 //Read Payments
 app.get('/api/read_payments',(req,res)=>{

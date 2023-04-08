@@ -71,7 +71,7 @@ function AddProduct() {
           <div className="row">
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputEmail1">Product Name</label>
-              <input type="text" class="form-control" placeholder="Enter product name" name='pname' onChange={setData} value={inpval.pname} />
+              <input type="text" class="form-control" placeholder="Enter product name" name='pname' onChange={setData} value={inpval.pname} required/>
 
               {/* <small class="form-text text-muted">We'll never share your email with anyone else.</small> */}
             </div>
@@ -85,7 +85,7 @@ function AddProduct() {
               <label>Category</label>
               {/* <input type="text" class="form-control" placeholder="Enter the category of the product" name='cat_name' onChange={setData} value={inpval.cat_name} />
                */}
-              <select id="category-select" onChange={setData} name='cat_name' >
+              <select id="category-select" onChange={setData} name='cat_name' required >
                 <option disabled selected>Choose</option>
                 {categories.map(category => (
                   <option key={category.cat_name} value={category.cat_name}>
@@ -96,23 +96,23 @@ function AddProduct() {
             </div>
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label>Price</label>
-              <input type="number" class="form-control" placeholder="Enter the price of the product" name='price' onChange={setData} value={inpval.price} />
+              <input type="number" class="form-control" placeholder="Enter the price of the product" name='price' onChange={setData} value={inpval.price} required/>
             </div>
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label>Stocks</label>
-              <input type="number" class="form-control" placeholder="Enter the stocks of the product" name='pstock' onChange={setData} value={inpval.pstock} />
+              <input type="number" class="form-control" placeholder="Enter the stocks of the product" name='pstock' onChange={setData} value={inpval.pstock} required/>
             </div>
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label>Product Image Link</label>
-              <input type="text" class="form-control" placeholder="Enter the image link" name='pimg' onChange={setData} value={inpval.pimg} />
+              <input type="text" class="form-control" placeholder="Enter the image link" name='pimg' onChange={setData} value={inpval.pimg} required/>
             </div>
             <div className='mb-3 col-lg-12 col-md-12 col-12'>
               <label> Product Description </label>
               <br />
-              <textarea name="pdesc" id="" cols="70" rows="5" onChange={setData} value={inpval.pdesc}></textarea>
+              <textarea name="pdesc" id="" cols="70" rows="5" onChange={setData} value={inpval.pdesc} required></textarea>
             </div>
             <div className='mb-3 col-lg-6 col-md-12 col-12'>
-              <button type="submit" class="btn btn-primary mt-4" onClick={submit}>Submit</button>
+              <button type="submit" class="btn btn-primary mt-4" onClick={submit} required>Submit</button>
             </div>
           </div>
         </form>
