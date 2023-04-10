@@ -40,7 +40,6 @@
 
 .User-paddingcontainer{
     width: 80%;
-    /* background-color: aqua; */
 }
 
 .User-grid{
@@ -57,10 +56,9 @@
 }
 
 .CartScan-container{
-    width: 400px;
+    width: 450px;
     padding: 10px;
     padding-inline: 30px;   
-    /* background-color: lightgrey; */
 }   
 
 .Cart-itemscroll{
@@ -76,16 +74,15 @@
   }
 
 .Cart-itemsContainer{
-    height: 50px;
+    height: 60px;
     width: 100%;
     margin-block: 15px;
-    padding-block: 10px;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: aqua;
+    padding: 0;
 }
 
 .Cart-bottomsheet{

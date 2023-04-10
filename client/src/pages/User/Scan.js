@@ -31,7 +31,7 @@ const Scan = (props) => {
 
   return (
     <div className="User-header User-column">
-      <div className='CartScan-container' style={{ backgroundColor: '#787878' }}>
+      <div className='CartScan-container'>
         <div className='User-row' style={{ color: 'white' }}>
           <Link to="/cart"><h1 style={{ color: 'white' }}>&larr;</h1></Link>
           <h1 style={{ fontSize: '25px' }}>Scan</h1>

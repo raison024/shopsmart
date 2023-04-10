@@ -55,11 +55,23 @@ function Cart() {
       })
   }
 
+  const deleteall = () => {
+    Axios.post('http://localhost:3002/api/deleteallcartitems', {vid: state.cartId})
+    window.location.reload(false);
+  }
+
   const [prodList, setProdList] = useState([]);
+  const [totalprice, setTotalPrice] = useState([]);
 
   useEffect(() => {
     Axios.post("http://localhost:3002/api/getcartitems", {vid: state.cartId }).then((data) => {
       setProdList(data.data)
+    });
+
+    Axios.post("http://localhost:3002/api/gettotalcartprice", {vid: state.cartId }).then((data) => {
+      setTotalPrice(parseInt(data))
+      console.log("Test value:" +(data.data))
+      console.log("this is the total:"+totalprice)
     });
   }, [])
 
@@ -69,7 +81,7 @@ function Cart() {
         <div className='User-row'>
           <Link to="/home"><h1>&larr;</h1></Link>
           <h1 style={{ fontSize: '25px' }}>Cart</h1>
-          <Button variant='text' style={{ textTransform: 'none' }}>Delete</Button>
+          <Button variant='text' style={{ textTransform: 'none' }} onClick={deleteall}>Delete</Button>
         </div>
 
         <p>All the items you have added are present here ;)</p>
@@ -83,6 +95,7 @@ function Cart() {
                   style={{ padding: '10px', backgroundColor: '#e9edff', borderRadius: '5px' }}>
                 </img>
                 {val.pname}
+                <p>{val.pprice}</p>
                 <div style={{ height: '40px' }} className='User-row'>
                   <IconButton aria-label="Remove" color='primary'><IndeterminateCheckBox /> </IconButton>
                   <p>1</p>
@@ -119,6 +132,8 @@ function Cart() {
             </div>
             <div>
               <p>hey</p>
+              <p></p>
+              {/* <p>{totalprice}</p> */}
             </div>
           </div>
 
