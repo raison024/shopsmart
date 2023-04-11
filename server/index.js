@@ -22,6 +22,34 @@ app.post('/api/createuser', (req, res) => {
     });
 })
 
+//Route to login
+app.post('/api/loginuser', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    db.query("SELECT * FROM customer where c_name = ? and c_pass = ?", [email, password], (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        }
+
+        if (result.length > 0) {
+            res.send(result);
+        }
+        else {
+            res.send({ message: "Wrong Email/Password Combination!" });
+        }
+    })
+})
+
+// Route to get all products
+app.get("/api/getallproducts", (req,res)=>{
+    db.query("SELECT * FROM products", (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+    res.send(result)
+    });   });
+
+
 // Route to check product for cart
 app.post('/api/getname', (req, res) => {
     const name = req.body.name;
@@ -106,24 +134,6 @@ app.post("/api/deleteallcartitems", (req,res) => {
     })
 })
 
-
-//Route to login
-app.post('/api/loginuser', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    db.query("SELECT * FROM customer where c_name = ? and c_pass = ?", [email, password], (err, result) => {
-        if (err) {
-            res.send({ err: err });
-        }
-
-        if (result.length > 0) {
-            res.send(result);
-        }
-        else {
-            res.send({ message: "Wrong Email/Password Combination!" });
-        }
-    })
-})
 
 // Route to like a post
 app.post('/api/like/:id', (req, res) => {
