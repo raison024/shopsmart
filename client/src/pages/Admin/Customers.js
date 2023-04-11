@@ -14,7 +14,7 @@ function Customers() {
   const itemsPerPage = 1; // Number of items to show per page
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/api/read_customers')
+    Axios.get('http://localhost:3003/api/read_customers')
       .then(res => {
         console.log(res);
         setCustomers(res.data);
@@ -28,7 +28,7 @@ function Customers() {
 
   function handleDelete(cid) {
     console.log("Customer id : " + cid)
-    Axios.post('http://localhost:3002/api/delete_customers', { cid: cid })
+    Axios.post('http://localhost:3003/api/delete_customers', { cid: cid })
       .then(res => {
         console.log(res.data);
         window.location.reload(false);

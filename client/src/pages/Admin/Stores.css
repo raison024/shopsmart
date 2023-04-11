@@ -45,3 +45,10 @@ th,td{
 .feedback-container{
   padding: 10vh;
 }
+
+@media (max-height: 760px) {
+
+  /* .p-3  {
+    margin-left: 50%;
+  } */
+}

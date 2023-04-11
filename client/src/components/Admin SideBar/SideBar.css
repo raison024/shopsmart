@@ -4,6 +4,7 @@
   background-color: #1565c0;
   width: 20%;
   height: 100%;
+  float: left;
 }
 .SideBarList{
     height: auto;

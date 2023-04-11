@@ -11,7 +11,7 @@ function Feedbacks() {
     const [feedbacks, setFeedbacks] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3002/api/read_feedbacks')
+        Axios.get('http://localhost:3003/api/read_feedbacks')
             .then(res => {
                 console.log(res)
                 setFeedbacks(res.data)

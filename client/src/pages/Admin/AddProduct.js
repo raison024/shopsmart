@@ -35,7 +35,7 @@ function AddProduct() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/api/read_cat_name')
+    Axios.get('http://localhost:3003/api/read_cat_name')
       .then(response => {
         // console.log(response)
         setCategories(response.data);
@@ -48,7 +48,7 @@ function AddProduct() {
 
   //Sending data to the backend 
   const submit = () => {
-    Axios.post('http://localhost:3002/api/add_product', inpval)
+    Axios.post('http://localhost:3003/api/add_product', inpval)
       .then((response) => {
 
         if (response.data.message) {

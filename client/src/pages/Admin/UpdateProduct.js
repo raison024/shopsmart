@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import SideBar from '../../components/Admin SideBar/SideBar'
 import './Stores'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 
 
 function UpdateProduct() {
 
+  const navigate = useNavigate();
   const { pid } = useParams();
   const [product, setProduct] = useState({ pname: 'hello', cat_name: 'jkbbnk', price: 0, STOCKS: 10, pimg: 'jnjnkj', pdesc: '' })
 
@@ -15,12 +16,12 @@ function UpdateProduct() {
 
   //Getting the existing details from the backend
   useEffect(() => {
-    Axios.get(`http://localhost:3002/api/read_update_product/${pid}`)
+    Axios.get(`http://localhost:3003/api/read_update_product/${pid}`)
       .then(res => {
         // console.log("Stocks from database : " + res.data)
         setProduct(res.data)
         console.log(product)
-        Axios.get('http://localhost:3002/api/read_cat_name')
+        Axios.get('http://localhost:3003/api/read_cat_name')
           .then(response => {
             // console.log(response)
             setCategories(response.data);
@@ -42,8 +43,10 @@ function UpdateProduct() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("Product Update : " + product.stocks)
-    Axios.post(`http://localhost:3002/api/submit_update_product/${pid}`, product)
-      .then(res => console.log(res))
+    Axios.post(`http://localhost:3003/api/submit_update_product/${pid}`, product)
+      .then(res => {console.log(res)
+        navigate("/admin_products");
+      })
       .catch(err => console.log(err));
   };
 

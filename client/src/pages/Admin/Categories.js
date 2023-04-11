@@ -35,7 +35,7 @@ function Categories() {
   const [newcategory, setNewCategory] = useState([])
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/api/read_categories')
+    Axios.get('http://localhost:3003/api/read_categories')
       .then(res => {
         setCategory(res.data)
         // console.log(category)
@@ -56,7 +56,7 @@ function Categories() {
 
   function handleDelete(cat_id){
     console.log("Category id : " + cat_id)
-    Axios.post('http://localhost:3002/api/delete_categories', {cat_id: cat_id})
+    Axios.post('http://localhost:3003/api/delete_categories', {cat_id: cat_id})
     .then(res=>{
       console.log(res.data);
       window.location.reload(false);
@@ -71,7 +71,7 @@ function Categories() {
 
     else {
 
-       Axios.post('http://localhost:3002/api/add_categories', newcategory[0])
+       Axios.post('http://localhost:3003/api/add_categories', newcategory[0])
         .then((response) => {
           if (response.data.message) {
             setsubmitStatus(response.data.message)

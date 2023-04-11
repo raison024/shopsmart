@@ -87,7 +87,7 @@ function Products() {
 
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/api/get_product')
+    Axios.get('http://localhost:3003/api/get_product')
       .then((res) => {
         setProduct(res.data);
         setIsMapLoaded(true); // set isMapLoaded to true after data is loaded
@@ -99,7 +99,7 @@ function Products() {
 
   function handleDelete(pid) {
     console.log("Product id : " + pid)
-    Axios.post('http://localhost:3002/api/deleteprod', { pid: pid })
+    Axios.post('http://localhost:3003/api/deleteprod', { pid: pid })
       .then(res => {
         console.log(res.data);
         window.location.reload(false);

@@ -14,7 +14,7 @@ function Customers() {
   const [payments, setPayments] = useState([])
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/api/read_payments')
+    Axios.get('http://localhost:3003/api/read_payments')
       .then(res => {
         console.log(res)
         setPayments(res.data)
