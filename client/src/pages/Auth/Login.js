@@ -51,6 +51,11 @@ function Login() {
           <Link to="/register" style={{width: '100%', margin: '0'}}>
             <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Sign Up</Button>
           </Link>
+
+          <h4>Admin?</h4>
+          <Link to="/adminlogin" style={{width: '100%', margin: '0'}}>
+            <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Admin Login</Button>
+          </Link>
         </form>
         <h1>{loginStatus}</h1>
       </div>

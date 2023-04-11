@@ -6,7 +6,18 @@ import Register from './pages/Auth/Register';
 import UserHome from './pages/User/UserHome';
 import Scan from './pages/User/Scan';
 import Cart from './pages/User/Cart';
-import Admin from './pages/Admin/Admin';
+
+import AdminLogin from './pages/Admin/AdminLogin';
+import AdminHome  from './pages/Admin/AdminHome';
+import Stores from '../src/pages/Admin/Stores'
+import Products from './pages/Admin/Products'
+import Customers from './pages/Admin/Customers'
+import Payments from './pages/Admin/Payments'
+import AddProduct from './pages/Admin/AddProduct';
+import UpdateProduct from './pages/Admin/UpdateProduct';
+import Categories from '../src/pages/Admin/Categories';
+import Feedbacks from './pages/Admin/Feedback';
+
 
 export default function App() {
   return (
@@ -18,7 +29,17 @@ export default function App() {
         <Route path="/home" element={<UserHome />} />
         <Route path="/scan" element={<Scan />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/admin" element={<Admin />} />
+        
+        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/adminhome" element={<AdminHome/>}/>
+        <Route exact path="/admin_stores" element={<Stores />} />
+        <Route exact path="/admin_products" element={<Products />} />
+        <Route exact path="/admin_products/add" element={<AddProduct />} />
+        <Route exact path="/admin_products/update/:pid" element={<UpdateProduct />} />
+        <Route exact path="/admin_customers" element={<Customers />} />
+        <Route exact path="/admin_payments" element={<Payments />} />
+        <Route exact path="/admin_category" element={<Categories/>} />
+        <Route exact path="/admin_feedbacks" element={<Feedbacks/>} />
       </Routes>
     </BrowserRouter>
   );

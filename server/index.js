@@ -10,10 +10,11 @@ app.use(express.json())
 // Route for creating a user
 app.post('/api/createuser', (req, res) => {
 
+    const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
 
-    db.query("INSERT INTO customer (c_id, c_name, c_pass) VALUES (NULL,?,?)", [email, password], (err, result) => {
+    db.query("INSERT INTO customers (cid, cname, cemail, cpass, cphone, gender, DOB) VALUES (NULL,?,?,?)", [name, email, password], (err, result) => {
         if (err) {
             console.log(err)
         }
