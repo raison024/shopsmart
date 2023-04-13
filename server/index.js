@@ -26,7 +26,7 @@ app.post('/api/createuser', (req, res) => {
 app.post('/api/loginuser', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    db.query("SELECT * FROM customer where c_name = ? and c_pass = ?", [email, password], (err, result) => {
+    db.query("SELECT * FROM customers where cemail = ? and cpass = ?", [email, password], (err, result) => {
         if (err) {
             res.send({ err: err });
         }
@@ -53,7 +53,7 @@ app.get("/api/getallproducts", (req,res)=>{
 // Route to check product for cart
 app.post('/api/getname', (req, res) => {
     const name = req.body.name;
-    db.query("SELECT * FROM product where pid = ?", [name], (err, result) => {
+    db.query("SELECT * FROM products where pid = ?", [name], (err, result) => {
         if (err) {
             res.send({ err: err });
         }
@@ -73,7 +73,7 @@ app.post('/api/insertintocart', (req, res) => {
     const vid = req.body.vid;
     const pid = req.body.pid;
 
-    db.query("INSERT INTO cart (vc_id, cid, pid, cquantity, ctotal) VALUES (?,1,?,1,100)", [vid, pid], (err, result) => {
+    db.query("INSERT INTO virtual_cart (vc_id, cid, pid, cat_id, quantity) VALUES (?,1,?,1,2)", [vid, pid], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -86,7 +86,7 @@ app.post("/api/getcartitems", (req, res) => {
 
     const vid = req.body.vid;
 
-    db.query("SELECT * FROM product WHERE pid IN (SELECT pid FROM cart WHERE vc_id=?)", [vid], (err, result) => {
+    db.query("SELECT * FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=?)", [vid], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -99,11 +99,12 @@ app.post("/api/gettotalcartprice", (req, res) =>  {
     
     const vid = req.body.vid;
 
-    db.query("SELECT SUM(pprice) FROM product WHERE pid IN (SELECT pid FROM cart WHERE vc_id=?)", [vid], (err, result) => {
+    db.query("SELECT SUM(price) FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=?)", [vid], (err, result) => {
         if (err) {
             console.log(err)
         }
         console.log(result);
+        console.log("this is vid"+vid)
         res.send(result);
     });
 });
@@ -126,7 +127,7 @@ app.post("/api/deleteallcartitems", (req,res) => {
     
     const vid = req.body.vid;
 
-    db.query("DELETE FROM cart where vc_id=?", [vid], (err, result) => {
+    db.query("DELETE FROM virtual_cart where vc_id=?", [vid], (err, result) => {
         if(err) {
             console.log(err)
         }

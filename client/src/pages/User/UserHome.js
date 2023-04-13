@@ -46,7 +46,7 @@ function UserHome() {
       <Navbar />
       <div className='User-paddingcontainer'>
         <img src={Poster} width='100%' className='User-poster'></img>
-        <p>{num}</p>
+        <p style={{display: 'none'}}>{num}</p>
         <h3 style={{ margin: '0' }}><br />Products bought most</h3>
         <br />
         <div className='User-grid'>
@@ -54,7 +54,7 @@ function UserHome() {
         {prodList.map((val, key) => (
           <div className='Card'>
           <div className='Card-column' style={{ height: '60%', width: '90%', backgroundColor: '#e9edff', marginTop: '10px', alignSelf: 'center', borderRadius: '10px' }}>
-              <img src="https://d3r3h30p75xj6a.cloudfront.net/artikelen/86690_1_4060_637717248798265156.png?width=500&height=500&mode=crop" height='100%'></img>
+              <img src={val.pimg} height='100%'></img>
               {/* <img src={img} height='100%'></img> */}
           </div>
           <div style={{ width: '90%' }}>
@@ -73,7 +73,8 @@ function UserHome() {
       {/* <Link to="/cart" state={{cartid:{num}}}  className='User-generate' onClick={randomclick} > */}
         <Button variant='contained' startIcon={<AddCartIcon />}
           onClick={randomclick}
-          style={{ borderRadius: '50px', textTransform: 'none', paddingBlock: '15px' }}>
+          className='User-gencart'
+          style={{ borderRadius: '50px', textTransform: 'none', paddingBlock: '15px', position: 'fixed', bottom: 0 }}>
           Generate Virtual Cart</Button>
       {/* </Link> */}
     </div>

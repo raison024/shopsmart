@@ -68,15 +68,16 @@ function Cart() {
       setProdList(data.data)
     });
 
-    Axios.post("http://localhost:3002/api/gettotalcartprice", {vid: state.cartId }).then((data) => {
+    Axios.post("http://localhost:3002/api/gettotalcartprice", {vid: state.cartId }).then((data, vid) => {
       setTotalPrice(parseInt(data))
+      console.log("Virtual Cart id:" +vid)
       console.log("Test value:" +(data.data))
       console.log("this is the total:"+totalprice)
     });
   }, [])
 
   return (
-    <div className='User-header User-column'>
+    <div className='User-column'>
       <div className='CartScan-container'>
         <div className='User-row'>
           <Link to="/home"><h1>&larr;</h1></Link>
@@ -98,7 +99,7 @@ function Cart() {
                 <p>{val.pprice}</p>
                 <div style={{ height: '40px' }} className='User-row'>
                   <IconButton aria-label="Remove" color='primary'><IndeterminateCheckBox /> </IconButton>
-                  <p>1</p>
+                  <p>{val.quantity}</p>
                   <IconButton aria-label="Add" color='primary'><AddBox /></IconButton>
                 </div>
               </div>
@@ -125,14 +126,13 @@ function Cart() {
         <div className='Cart-bottomsheet'>
           <div className='Cart-spacerow'>
             <div>
-              <p>3 Items</p>
-              <p>Total Discount</p>
+              <p>Total Items</p>
               <p>Amount to be paid</p>
               <p style={{ fontWeight: 'bold', color: '#1565c0' }}>View Bill</p>
             </div>
             <div>
-              <p>hey</p>
-              <p></p>
+              <p>3</p>
+              <p>299</p>
               {/* <p>{totalprice}</p> */}
             </div>
           </div>

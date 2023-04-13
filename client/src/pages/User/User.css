@@ -74,13 +74,8 @@
     justify-self: center;
 }
 
-.User-generate{
-    position: fixed;
-    align-self: center;
-    bottom: 10px;
-}
-
 .CartScan-container{
+    height: 100vh;
     width: 450px;
     padding: 10px;
     padding-inline: 30px;   
