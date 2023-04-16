@@ -303,26 +303,41 @@ app.post('/api/delete_customers',(req,res)=>{
     })
 })
 
+// Get Popular Products
+app.get('/api/read_pop_products', (req, res) => {
+    // Execute the MySQL query
+    db.query(
+      'SELECT p.pname, v.pid, SUM(v.quantity * p.price) AS earnings FROM virtual_cart v JOIN products p ON p.pid = v.pid GROUP BY v.pid ORDER BY earnings DESC LIMIT 4',
+      (error, results, fields) => {
+        if (error) {
+          // Handle the error
+          console.log(error);
+          res.status(500).send('Internal Server Error');
+        } else {
+          // Return the results as an array of objects
+          const popularProducts = results.map((row) => {
+            return {
+              pname: row.pname,
+              pid: row.pid,
+              earnings: row.earnings
+            };
+          });
+          res.send(popularProducts);
+        }
+      }
+    );
+  });
 
-
-
-// app.post('/api/loginuser', (req,res)=> {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     db.query("SELECT * FROM customer where c_name = ? and c_pass = ?",[email, password], (err,result)=>{
-//         if(err) {
-//             res.send({ err:err });
-//         }
-
-//         if(result.length>0) {
-//             res.send(result);
-//         }
-//         else {
-//             res.send({ message: "Wrong Email/Password Combination!" });
-//         }
-//     })
-// })
-
+//Get Recent Feedback
+app.get('/api/recent_fb',(req,res)=>{
+    db.query('Select expectation from feedback order by fid desc limit 1',(err,result)=>{
+        if(err)
+          console.log(err)
+        else{
+            res.send(result)
+        }
+    })
+})
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })

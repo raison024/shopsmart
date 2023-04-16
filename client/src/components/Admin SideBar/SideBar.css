@@ -5,6 +5,7 @@
   width: 20%;
   height: 100%;
   float: left;
+  min-width: 50px;
 }
 .SideBarList{
     height: auto;
@@ -57,3 +58,4 @@
         display: none;
     }
   }
+
