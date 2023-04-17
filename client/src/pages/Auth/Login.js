@@ -20,7 +20,7 @@ function Login() {
     if(response.data.message) {
       setloginStatus(response.data.message)
     } else {
-      navigate("/home");
+      navigate("/home", { state: { userEmail: (email) } });
     }
 
     console.log(response);
@@ -44,20 +44,25 @@ function Login() {
             type='password' onChange={(e) => {
               setPassword(e.target.value);
             }}/>
+
+          <p style={{color: 'red'}}>{loginStatus}</p>
+
           <Button variant='contained' 
             style={{textTransform:'none', marginBlock: '15px'}} 
             fullWidth onClick={login}>Proceed</Button>
-          <h4>Are you a new user?</h4>
-          <Link to="/register" style={{width: '100%', margin: '0'}}>
-            <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Sign Up</Button>
+          <p>Are you a new user? &nbsp;
+          <Link to="/register" style={{width: '100%', margin: '0', textDecoration: 'none'}}>
+            Sign Up
+            {/* <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Sign Up</Button> */}
           </Link>
+          </p>
+          
 
-          <h4>Admin?</h4>
-          <Link to="/adminlogin" style={{width: '100%', margin: '0'}}>
-            <Button variant='contained' color='success' style={{textTransform:'none', marginTop: '20px'}} fullWidth>Admin Login</Button>
+          <Link to="/adminlogin" style={{width: '100%', margin: '0', textDecoration: 'none'}}>
+            Admin Login
           </Link>
         </form>
-        <h1>{loginStatus}</h1>
+        
       </div>
 )}
 

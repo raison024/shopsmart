@@ -25,7 +25,7 @@ function Navbar() {
       {/* Second Part */}
       <div>
         <Link to="/register">
-          <Button variant='text' style={{textTransform:'none', borderRadius: '100px', color: 'black'}}>Sign Up</Button>
+          <Button variant='text' style={{textTransform:'none', borderRadius: '100px', color: 'white'}}>Sign Up</Button>
         </Link>
         <Link to="/login">
           <Button variant='contained'

@@ -7,6 +7,7 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import AuthImg from '../../assets/Auth3.png'
 import HomeImg from '../../assets/Home-img.png'
 import ScanImg from '../../assets/Scan1.png'
+import HomeText3 from '../../assets/Home-text.png'
 
 
 function Home() {
@@ -18,20 +19,23 @@ function Home() {
       {/* First Page */}
       <div className='Home-page Home-row'>
         <div className='Homepage1-container Home-column'>
-          <div style={{ width: '70%', textAlign: 'left' }}>
+          <div style={{ width: '80%', textAlign: 'left' }}>
+          <div style={{ width: '40%', textAlign: 'left' }}>
             <h1>Simplify Your Shopping with <span style={{ color: '#1565c0' }}>Shop Smart</span></h1>
-            <p>We are excited to introduce our self-checkout system, which is designed to provide our customers
+            <p style={{ color: '#fff' }}>We are excited to introduce our self-checkout system, which is designed to provide our customers
               with a convenient and efficient shopping experience.</p><br />
 
             <div className='Home-row' style={{ justifyContent: 'flex-start' }} >
               <Button variant='contained' style={{ textTransform: 'none', width: '150px', height: '40px' }} >Get Started</Button>
               <Button variant="text" startIcon={<PlayCircleOutlineIcon />}
-                style={{ margin: '10px', color: 'black', textTransform: 'none' }}>
+                style={{ margin: '10px', color: 'white', textTransform: 'none' }}>
                 Watch Video
               </Button>
             </div>
 
-            <Paper elevation={1} component="form"
+            <img src={HomeText3} style={{marginTop: '20px'}}></img>
+
+            {/* <Paper elevation={1} component="form"
               sx={{
                 p: '4px 4px', display: 'flex', alignItems: 'center',
                 width: '90%', borderRadius: '50px', height: 35, marginTop: '30px', background: 'white'
@@ -45,14 +49,14 @@ function Home() {
               <Button variant='contained' style={{ borderRadius: '50px', textTransform: 'none' }}>
                 Search
               </Button>
-            </Paper>
-
+            </Paper> */}
+            </div>
           </div>
         </div>
 
-        <div className='Homepage1-container Home-column' style={{ backgroundColor: '#15a2cc' }}>
+        {/* <div className='Homepage1-container Home-column' style={{ backgroundColor: '#15a2cc' }}>
           <img src={HomeImg} width="75%"></img>
-        </div>
+        </div> */}
 
         {/* <div className='Home-scrolldown'>&darr; Scroll down to learn more</div> */}
       </div>

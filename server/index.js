@@ -40,6 +40,32 @@ app.post('/api/loginuser', (req, res) => {
     })
 })
 
+//Route to get username from email
+app.post('/api/getusername', (req, res) => {
+    const email = req.body.email;
+    db.query("SELECT cname FROM customers WHERE cemail = ?", [email], (err, result) => {
+      if (err) {
+        res.send({ error: err });
+      } else {
+        res.send(result[0]);
+        console.log(result[0])
+      }
+    });
+  });
+
+//Route to get userid from email
+app.post('/api/getuserid', (req, res) => {
+    const email = req.body.email;
+    db.query("SELECT cid FROM customers WHERE cemail = ?", [email], (err, result) => {
+      if (err) {
+        res.send({ error: err });
+      } else {
+        res.send(result[0]);
+        console.log(result[0])
+      }
+    });
+  });
+
 // Route to get all products
 app.get("/api/getallproducts", (req,res)=>{
     db.query("SELECT * FROM products", (err,result)=>{
@@ -60,6 +86,7 @@ app.post('/api/getname', (req, res) => {
         if (result.length > 0) {
             res.send(result);
             console.log("Success!!!!");
+            console.log(result);
         }
         else {
             res.send({ message: "Product not recognized!" });
@@ -67,13 +94,28 @@ app.post('/api/getname', (req, res) => {
     });
 });
 
+// app.post("/api/getname", (req, res) =>  {
+    
+//     const name = req.body.name;
+
+//     db.query("SELECT pname FROM products WHERE pid ?", [name], (err, result) => {
+//         if (err) {
+//             console.log(err)
+//         }
+//         console.log(result);
+//         console.log("this is vid"+vid)
+//         res.send(result);
+//     });
+// });
+
 // Route for insert into cart
 app.post('/api/insertintocart', (req, res) => {
 
     const vid = req.body.vid;
+    const cid = req.body.cid;
     const pid = req.body.pid;
 
-    db.query("INSERT INTO virtual_cart (vc_id, cid, pid, cat_id, quantity) VALUES (?,1,?,1,2)", [vid, pid], (err, result) => {
+    db.query("INSERT INTO virtual_cart (vc_id, cid, pid, quantity) VALUES (?,?,?,2)", [vid, cid, pid], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -85,8 +127,9 @@ app.post('/api/insertintocart', (req, res) => {
 app.post("/api/getcartitems", (req, res) => {
 
     const vid = req.body.vid;
+    const cid = req.body.cid;
 
-    db.query("SELECT * FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=?)", [vid], (err, result) => {
+    db.query("SELECT * FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=? AND cid=?)", [vid, cid], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -98,8 +141,9 @@ app.post("/api/getcartitems", (req, res) => {
 app.post("/api/gettotalcartprice", (req, res) =>  {
     
     const vid = req.body.vid;
+    const cid = req.body.cid;
 
-    db.query("SELECT SUM(price) FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=?)", [vid], (err, result) => {
+    db.query("SELECT SUM(price) FROM products WHERE pid IN (SELECT pid FROM virtual_cart WHERE vc_id=? AND cid=?)", [vid, cid], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -126,13 +170,29 @@ app.post("/api/gettotalcartprice", (req, res) =>  {
 app.post("/api/deleteallcartitems", (req,res) => {
     
     const vid = req.body.vid;
+    const cid = req.body.cid;
 
-    db.query("DELETE FROM virtual_cart where vc_id=?", [vid], (err, result) => {
+    db.query("DELETE FROM virtual_cart where vc_id=? AND cid=?", [vid, cid], (err, result) => {
         if(err) {
             console.log(err)
         }
         res.send(result)
     })
+})
+
+// Route for creating a payment
+app.post('/api/createpayment', (req, res) => {
+
+    const cid = req.body.cid;
+    const total = req.body.total;
+    const vid = req.body.vid;
+
+    db.query("INSERT INTO payment (pay_id, cid, total_pay, vc_id, pay_time) VALUES (NULL,?,?,?,NULL)", [cid,total,vid], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
 })
 
 
