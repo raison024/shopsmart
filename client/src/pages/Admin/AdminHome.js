@@ -18,7 +18,10 @@ import Axios from 'axios';
 function AdminHome() {
 
   const [popProducts, setPopProducts] = useState([]);
-  const [lastFeedback,setLastFeedback]=useState("");
+  const [lastFeedback, setLastFeedback] = useState([]);
+  const [revenue, setRevenue] = useState([]);
+  const [customers, setCustomers] = useState([]);
+
 
   useEffect(() => {
     Axios.get('http://localhost:3003/api/read_pop_products')
@@ -31,14 +34,29 @@ function AdminHome() {
   useEffect(() => {
     Axios.get('http://localhost:3003/api/recent_fb')
       .then((response) => {
-        setLastFeedback(response.data);
-        console.log("feedback : " + lastFeedback)
+        setLastFeedback(response.data.expectation);
+        console.log("feedback : " + response.data.expectation);
       })
       .catch((error) => {
         console.log(error);
       });
-  },{});
+  }, [lastFeedback]);
 
+  useEffect(() => {
+    Axios.get('http://localhost:3003/api/recent_week_rev')
+      .then((response) => {
+        setRevenue(response.data.week_pay);
+        console.log("Revenue : " + revenue);
+      })
+  }, [revenue]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3003/api/get_total_customers')
+      .then((response) => {
+        setCustomers(response.data.total_cus);
+        console.log("Customers : " + customers);
+      })
+  }, [revenue]);
 
   const navigate = useNavigate();
 
@@ -58,11 +76,10 @@ function AdminHome() {
             <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginRight: '10px', borderRadius: 20 }}>
               <CardActionArea>
                 <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {/* Replace the placeholder text with the actual total number of customers */}
-                    Revenue: 100
-                  </Typography>
-                  <h4>1234</h4>
+                  <h6>
+                    Past week's revenue
+                  </h6>
+                  <h4>&#x20B9;{revenue}</h4>
                   <CardMedia
                     component="img"
                     height="140"
@@ -81,11 +98,10 @@ function AdminHome() {
             <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginLeft: '10px', borderRadius: 20 }}>
               <CardActionArea>
                 <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {/* Replace the placeholder text with the actual total number of customers */}
-                    Customers
-                  </Typography>
-                  <h4>1234</h4>
+                  <h6>
+                  Total Customer Population
+                  </h6>
+                  <h4>{customers}</h4>
                   <CardMedia
                     component="img"
                     height="140"
@@ -106,7 +122,7 @@ function AdminHome() {
           </div>
         </Card>
         <div className='AdminCardsRight'>
-          <Card sx={{ maxWidth: 345, minWidth: 250 }} style={{ marginRight: '10px', borderRadius: 20 ,marginBottom:20}}>
+          <Card sx={{ maxWidth: 345, minWidth: 250 }} style={{ marginRight: '10px', borderRadius: 20, marginBottom: 20 }}>
             <CardActionArea>
               <CardContent>
                 <h4>Popular Products</h4>
@@ -123,7 +139,7 @@ function AdminHome() {
                       </div>
                     ))}
                   </div>
-                      
+
                 </div>
               </CardContent>
 
@@ -139,10 +155,10 @@ function AdminHome() {
               <CardContent>
                 <h4>Latest Feedback</h4>
                 <div className="RightCardsHead">
-                  <h6 style={{marginLeft:10,marginTop:10}}>Expectation</h6>
+                  <h6 style={{ marginLeft: 10, marginTop: 10 }}>Expectation</h6>
                 </div>
                 <div className="RecentFeedback">
-                    <p style={{marginLeft:10}}>{lastFeedback}</p>
+                  <p style={{ marginLeft: 10 }}>{lastFeedback}</p>
                 </div>
               </CardContent>
 

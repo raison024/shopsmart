@@ -237,9 +237,11 @@ app.post('/api/submit_update_product/:pid',(req,res)=>{
     })
 
 })
+
+
 //Read Payments
 app.get('/api/read_payments',(req,res)=>{
-    const payq ='SELECT * FROM PAYMENT'
+    const payq = 'SELECT customers.cname, payment.* FROM payment INNER JOIN customers ON payment.cid = customers.cid';
     db.query(payq,(err,result)=>{
         if(err)
           throw err
@@ -250,6 +252,7 @@ app.get('/api/read_payments',(req,res)=>{
         }
     })
 })
+
 
 //Read Feedbacks
 app.get('/api/read_feedbacks',(req,res)=>{
@@ -334,7 +337,27 @@ app.get('/api/recent_fb',(req,res)=>{
         if(err)
           console.log(err)
         else{
-            res.send(result)
+            res.send(result[0])
+        }
+    })
+})
+//Get Past Week Revenue
+app.get('/api/recent_week_rev',(req,res)=>{
+    db.query('SELECT SUM(total_pay) as week_pay FROM payment  WHERE pay_time >= DATE_SUB(NOW(), INTERVAL 1 WEEK)',(err,result)=>{
+        if(err)
+        console.log(err)
+        else{
+            res.send(result[0]);
+        }
+    })
+})
+//Get Customers
+app.get('/api/get_total_customers',(req,res)=>{
+    db.query('SELECT COUNT(*) AS total_cus FROM CUSTOMERS',(err,result)=>{
+        if(err)
+          throw(err)
+        else{
+            res.send(result[0]);
         }
     })
 })

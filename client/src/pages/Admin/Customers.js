@@ -11,7 +11,7 @@ import Axios from 'axios';
 function Customers() {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 1; // Number of items to show per page
+  const itemsPerPage = 10; // Number of items to show per page
 
   useEffect(() => {
     Axios.get('http://localhost:3003/api/read_customers')
@@ -43,7 +43,10 @@ function Customers() {
     <div className='Admin'>
       <SideBar />
       <div class="AdminStores-container">
-        <div className='Customers-right mt-4'>
+        <div className='Customers-right mt-4' >
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+          <h3>Customers</h3>
+          </div>
           <table className="table table-hover mt-3 table-bordered ">
             <thead>
               <tr className='table-dark'>
@@ -80,11 +83,12 @@ function Customers() {
           </table>
           <ReactPaginate
             pageCount={Math.ceil(customers.length / itemsPerPage)}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={2}
+            pageRangeDisplayed={10}
+            marginPagesDisplayed={7}
             onPageChange={handlePageChange}
             containerClassName={'pagination'}
             activeClassName={'active'}
+            style={{display:'flex',flexDirection:''}}
           />
         </div>
       </div>
