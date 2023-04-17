@@ -54,14 +54,14 @@ function Categories() {
     console.log(newcategory[0])
   }
 
-  function handleDelete(cat_id){
+  function handleDelete(cat_id) {
     console.log("Category id : " + cat_id)
-    Axios.post('http://localhost:3003/api/delete_categories', {cat_id: cat_id})
-    .then(res=>{
-      console.log(res.data);
-      window.location.reload(false);
-    })
-    .catch(err=>console.log(err));
+    Axios.post('http://localhost:3003/api/delete_categories', { cat_id: cat_id })
+      .then(res => {
+        console.log(res.data);
+        window.location.reload(false);
+      })
+      .catch(err => console.log(err));
   }
 
 
@@ -71,7 +71,7 @@ function Categories() {
 
     else {
 
-       Axios.post('http://localhost:3003/api/add_categories', newcategory[0])
+      Axios.post('http://localhost:3003/api/add_categories', newcategory[0])
         .then((response) => {
           if (response.data.message) {
             setsubmitStatus(response.data.message)
@@ -92,58 +92,61 @@ function Categories() {
 
   return (
     <div className='Admin'>
-    <SideBar />
-    <div className="AdminStores-container">
-      
-      <div className='Categories-main'>
-        <div>
-          <Button onClick={handleOpen} variant="contained" className='Categories-btn' style={{ backgroundColor: 'rgb(21, 101, 192)' }} >Add Category</Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                ADD CATEGORY
-              </Typography>
-              <form action="">
-                <label htmlFor="cat_name">Category </label>
-                <input type="text" className='Category-add-sub-btn' name="cat_name" onChange={handleCategory} />
-                <Button variant="contained" className='Category-add-submit' onClick={submit} style={{marginLeft: '15em', marginTop: '2em'}}>SUBMIT</Button>
-                <h1>{submitStatus}</h1>
-              </form>
-            </Box>
-          </Modal>
-        </div>
-        <Stack spacing={2} direction="row">
+      <SideBar />
+      <div className="AdminStores-container">
 
-        </Stack>
-        <table className="table table-hover mt-3 table-bordered">
-          <thead>
-            <tr className='table-dark'>
-              <th scope="col">Category ID</th>
-              <th scope="col">Category Name</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              category.map((data, index) => (
-                <tr key={index}>
-                  <td>{data.cat_id}</td>
-                  <td>{data.cat_name}</td>
-                  <td className='d-flex justify-content-center'>
-                    <button className='btn ' onClick={() => handleDelete(data.cat_id)}><DeleteIcon/></button>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <div className='Categories-main'>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
+            <Button onClick={handleOpen} variant="contained" className='Categories-btn' style={{ backgroundColor: 'rgb(21, 101, 192)' }} >Add Category</Button>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', marginLeft: 160 }}>
+              <h3>Categories</h3>
+            </div>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  ADD CATEGORY
+                </Typography>
+                <form action="">
+                  <label htmlFor="cat_name">Category </label>
+                  <input type="text" className='Category-add-sub-btn' name="cat_name" onChange={handleCategory} />
+                  <Button variant="contained" className='Category-add-submit' onClick={submit} style={{ marginLeft: '15em', marginTop: '2em' }}>SUBMIT</Button>
+                  <h1>{submitStatus}</h1>
+                </form>
+              </Box>
+            </Modal>
+          </div>
+          <Stack spacing={2} direction="row">
+
+          </Stack>
+          <table className="table table-hover mt-3 table-bordered">
+            <thead>
+              <tr className='table-dark'>
+                <th scope="col">Category ID</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                category.map((data, index) => (
+                  <tr key={index}>
+                    <td>{data.cat_id}</td>
+                    <td>{data.cat_name}</td>
+                    <td className='d-flex justify-content-center'>
+                      <button className='btn ' onClick={() => handleDelete(data.cat_id)}><DeleteIcon /></button>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   )
 }
