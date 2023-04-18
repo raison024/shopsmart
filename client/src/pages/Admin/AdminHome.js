@@ -81,7 +81,7 @@ function AdminHome() {
       <div className='AdminStores-container' style={{ flexDirection: 'row' }}>
         <div className="AdminCardsLeftContainer">
 
-          <Card sx={{ minHeight: 400, minWidth: 600 }} style={{ margin: '10px', display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+          <Card sx={{ minHeight: 350, minWidth: 500 }} style={{ margin: '10px', display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <h4>Overview</h4>
             <div className="AdminCards">
               <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginRight: '10px', borderRadius: 20 }}>
