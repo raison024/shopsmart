@@ -29,6 +29,21 @@ app.post('/api/loginadmin', (req, res) => {
 
 })
 
+//Route to get recent payments
+app.get('/api/read_rec_pay',(req,res)=>{
+    const recPayQ ='Select *,cname from payment inner join customers on customers.cid = payment.cid order by pay_id desc limit 4';
+    db.query(recPayQ,(err,result)=>{
+        if(err){
+            console.log(err)
+            throw err
+        }
+        else{
+            console.log("Result : " + result)
+            res.send(result)
+        }
+    })
+})
+
 //Route to read cat_name s for adding product
 app.get('/api/read_cat_name', (req, res) => {
     const catnameq = 'SELECT cat_name from CATEGORY'

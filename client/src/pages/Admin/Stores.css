@@ -144,3 +144,8 @@ th,td{
   flex-direction: row;
   justify-content: space-between;
 }
+
+/* .AdminCardsLeftContainer{
+  display: flex;
+  flex-direction: column;
+} */
