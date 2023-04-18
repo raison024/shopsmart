@@ -138,7 +138,7 @@ function Categories() {
                     <td>{data.cat_id}</td>
                     <td>{data.cat_name}</td>
                     <td className='d-flex justify-content-center'>
-                      <button className='btn ' onClick={() => handleDelete(data.cat_id)}><DeleteIcon /></button>
+                      <button className='btn ' onClick={() => handleDelete(data.cat_id)} style={{marginLeft:100}}><DeleteIcon /></button>
                     </td>
                   </tr>
                 ))

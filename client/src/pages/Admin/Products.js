@@ -20,7 +20,7 @@ import ReactPaginate from 'react-paginate';
 function Products() {
 
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 7; // Number of items to show per page
+  const itemsPerPage = 4; // Number of items to show per page
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   function handlePageChange({ selected: selectedPage }) {

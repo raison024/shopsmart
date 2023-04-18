@@ -237,29 +237,32 @@ app.post('/api/createpayment', (req, res) => {
     });
 })
 
-
-// Route to like a post
-app.post('/api/like/:id', (req, res) => {
-
-    const id = req.params.id;
-    db.query("UPDATE posts SET likes = likes + 1 WHERE id = ?", id, (err, result) => {
-        if (err) {
+app.get('/api/get_pay_products/:pay_id', (req, res) => {
+    const pay_id = req.params.pay_id
+    db.query(' SELECT p.pid,p.pname, p.price, c.quantity FROM payment AS pay JOIN virtual_cart AS c ON pay.vc_id = c.vc_id JOIN products AS p ON c.pid = p.pid  WHERE pay.pay_id = ' + [pay_id] ,
+    (err,result)=>{
+        if(err){
+            throw (err)
             console.log(err)
         }
-        console.log(result)
-    });
-});
-
-// Route to delete a post
-
-app.delete('/api/delete/:id', (req, res) => {
-    const id = req.params.id;
-
-    db.query("DELETE FROM posts WHERE id= ?", id, (err, result) => {
-        if (err) {
-            console.log(err)
+        else{
+            res.send(result)
         }
     })
+})
+
+//Route to feedback post
+app.post("/api/feedbacks", (req, res) => { 
+    const { overall, offer, userFriendly, support, recommend, expectation } = req.body
+    const rating = [overall, offer, userFriendly, support, recommend, expectation];
+    
+    db.query("INSERT INTO feedback (overall, offer, user_friendly, support, recommend, expectation) VALUES (?,?,?,?,?,?)", rating, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        res.send({success: true});
+        }
+    );
 })
 
 app.listen(PORT, () => {

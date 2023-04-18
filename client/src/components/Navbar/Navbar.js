@@ -14,11 +14,9 @@ function Navbar() {
           Shop<span style={{color: '#1565c0'}}>Smart</span>
           &nbsp;
         </div>
-        |
+        
         <div className='Navbar-linkscontainer'>
-            <a href="http://" target="_blank" rel="noopener noreferrer">Home</a>
-            <a href="http://" target="_blank" rel="noopener noreferrer">About</a>
-            <a href="http://" target="_blank" rel="noopener noreferrer">Contact</a>
+            
         </div>
       </div>
 

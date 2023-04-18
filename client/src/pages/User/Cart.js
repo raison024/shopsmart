@@ -109,8 +109,8 @@ function Cart() {
         </div>
 
         <p>All the items you have added are present here ;)</p>
-        <p>{state.cartId}</p>
-        <p>{state.userId}</p>
+        {/* <p>{state.cartId}</p>
+        <p>{state.userId}</p> */}
         {/* <p>{userid}</p> */}
 
         <div className='Cart-itemscroll'>

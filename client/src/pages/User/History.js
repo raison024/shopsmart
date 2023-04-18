@@ -15,19 +15,23 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
-  };
+};
 
 function History() {
+    // const [totalAmount,setTotalAmount]=useState(0);
     const navigate = useNavigate();
     let { state } = useLocation();
 
     //Modal Open/Close
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {setOpen(true); handlebill();}
-    const handleClose = () => {
-        setOpen(false);
-        window.location.reload(false);
+
+    function handleOpen(pay_id) {
+        setSelectedPayId(pay_id);
+        setOpen(true);
     }
+
+    const handleClose = () => setOpen(false);
+    const [selectedPayId, setSelectedPayId] = useState(null);
 
     function goback() {
         navigate("/home", { state: { userEmail: (state.userEmail) } });
@@ -38,18 +42,30 @@ function History() {
     const [totalprice, setTotalPrice] = useState("Hey");
 
     function handlebill() {
-    Axios.post("http://localhost:3002/api/getcartitems", { vid: 300, cid: state.userId }).then((data) => {
-      setProdList(data.data)
-    });
+        Axios.post("http://localhost:3002/api/getcartitems", { vid: 300, cid: state.userId }).then((data) => {
+            setProdList(data.data)
+        });
 
-    Axios.post("http://localhost:3002/api/gettotalcartprice", { vid: 300, cid: state.userId }).then((data, vid) => {
-      setTotalPrice(parseInt(data))
-      console.log("Virtual Cart id:" + vid)
-      console.log("Test value:" + (data.data))
-      console.log("this is the total:" + totalprice)
-      setTotalPrice(data.data[0]["SUM(price)"]);
-    });
-}
+
+        Axios.post("http://localhost:3002/api/gettotalcartprice", { vid: 300, cid: state.userId }).then((data, vid) => {
+            setTotalPrice(parseInt(data))
+            console.log("Virtual Cart id:" + vid)
+            console.log("Test value:" + (data.data))
+            console.log("this is the total:" + totalprice)
+            setTotalPrice(data.data[0]["SUM(price)"]);
+        });
+    }
+    const [payProd, setPayProd] = useState([])
+    useEffect(() => {
+        if (selectedPayId) {
+            Axios.get(`http://localhost:3002/api/get_pay_products/${selectedPayId}`)
+                .then((res) => {
+                    console.log(res);
+                    setPayProd(res.data);
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [selectedPayId]);
 
     useEffect(() => {
         Axios.post("http://localhost:3002/api/getuserhistory", { cid: state.userId }).then((data) => {
@@ -62,32 +78,41 @@ function History() {
             <a className='Auth-goback' onClick={goback}>&larr; &nbsp;Go back</a>
             <div style={{ width: '30%', padding: '20px', background: '#d0d0d0' }}>
                 <h4>Payment History</h4>
-                <p>{state.userId}</p>
+                {/* <p>{state.userId}</p> */}
 
                 {payList.map(payment => (
-                    <a key={payment.pay_id} className='User-paylist' onClick={handleOpen}>
-                        <p>{payment.pay_time}</p>
-                        <p>Rs. {payment.total_pay}</p>
-                    </a>
+                //                       const dob = new Date(payment.pay_time);
+                // const formattedDate = dob.toLocaleDateString();
+                // const time = new Date(payment.pay_time)
+                // const formattedTime = time.toLocaleTimeString();
+                <a key={payment.pay_id} className='User-paylist' onClick={() => handleOpen(payment.pay_id)}>
+                    <p>{payment.pay_time}</p>
+                    <p>Rs. {payment.total_pay}</p>
+                </a>
                 ))}
 
                 <Modal
-                    open={open}                   
+                    open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <div className='User-column'>
+                        <div className='User-column' style={{ alignItems: 'flex-start' }}>
                             <h4>Your bill</h4>
-                            {prodList.map(cart => (
-                    <li key={cart.vc_id}>
-                        <p>{cart.pid}</p>
-                        <p>Rs. {cart.pname}</p>
-                    </li>
-                ))}
-                            <p><br />Total Items taken:</p>
-                            <p>Total amount:</p>
+                            <br />
+
+                            {payProd.map((prod) => {
+                                return (
+                                    <li key={prod.pid}> {prod.pname}
+                                        {/* <p>{prod.pid}</p> */}
+                                        {/* <p>{prod.quantity}</p> */}
+                                        <p>Rs. {prod.price}</p>
+
+                                    </li>
+                                )
+                            })}
+                            <p><br />Total Items taken:{payProd.length}</p>
                             <input type="text" placeholder="Name" name='total' style={{ display: 'none' }}></input>
                         </div>
                     </Box>

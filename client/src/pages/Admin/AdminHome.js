@@ -21,12 +21,21 @@ function AdminHome() {
   const [lastFeedback, setLastFeedback] = useState([]);
   const [revenue, setRevenue] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [recentPayments, setRecentPayments] = useState([])
 
 
   useEffect(() => {
     Axios.get('http://localhost:3003/api/read_pop_products')
       .then((res) => {
         setPopProducts(res.data);
+      })
+      .catch((err) => console.log('Error : ' + err));
+  }, []);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3003/api/read_rec_pay')
+      .then((res) => {
+        setRecentPayments(res.data);
       })
       .catch((err) => console.log('Error : ' + err));
   }, []);
@@ -70,57 +79,94 @@ function AdminHome() {
     <div className='Admin'>
       <SideBar />
       <div className='AdminStores-container' style={{ flexDirection: 'row' }}>
-        <Card sx={{ minHeight: 400, minWidth: 600 }} style={{ margin: '10px', display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h4>Overview</h4>
-          <div className="AdminCards">
-            <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginRight: '10px', borderRadius: 20 }}>
-              <CardActionArea>
-                <CardContent>
-                  <h6>
-                    Past week's revenue
-                  </h6>
-                  <h4>&#x20B9;{revenue}</h4>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={Revenue}
-                    alt="green iguana"
-                  />
-                </CardContent>
+        <div className="AdminCardsLeftContainer">
 
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  <OpenInNewIcon style={{ fontSize: 'medium' }} />
-                </Button>
-              </CardActions>
-            </Card>
-            <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginLeft: '10px', borderRadius: 20 }}>
-              <CardActionArea>
-                <CardContent>
-                  <h6>
-                  Total Customer Population
-                  </h6>
-                  <h4>{customers}</h4>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={Scan}
-                    alt="green iguana"
-                  />
-                </CardContent>
-                <div style={{ position: 'relative' }}>
-                </div>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  <OpenInNewIcon style={{ fontSize: 'medium' }} />
-                </Button>
-              </CardActions>
-            </Card>
+          <Card sx={{ minHeight: 350, minWidth: 500 }} style={{ margin: '10px', display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+            <h4>Overview</h4>
+            <div className="AdminCards">
+              <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginRight: '10px', borderRadius: 20 }}>
+                <CardActionArea>
+                  <CardContent>
+                    <h6>
+                      Past week's revenue
+                    </h6>
+                    <h4>&#x20B9;{revenue}</h4>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={Revenue}
+                      alt="green iguana"
+                    />
+                  </CardContent>
 
-          </div>
-        </Card>
+                </CardActionArea>
+                <CardActions>
+                  {/* <Button size="small" color="primary">
+                    <OpenInNewIcon style={{ fontSize: 'medium' }} />
+                  </Button> */}
+                </CardActions>
+              </Card>
+              <Card sx={{ maxWidth: 345, minWidth: 250, maxHeight: 350 }} style={{ marginLeft: '10px', borderRadius: 20 }}>
+                <CardActionArea>
+                  <CardContent>
+                    <h6>
+                      Total Customer Population
+                    </h6>
+                    <h4>{customers}</h4>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={Scan}
+                      alt="green iguana"
+                    />
+                  </CardContent>
+                  <div style={{ position: 'relative' }}>
+                  </div>
+                </CardActionArea>
+                <CardActions>
+                  {/* <Button size="small" color="primary">
+                    <OpenInNewIcon style={{ fontSize: 'medium' }} />
+                  </Button> */}
+                </CardActions>
+              </Card>
+
+            </div>
+          </Card>
+            <h6>Recent Payments</h6>
+          <table className="table table-hover mt-3 table-bordered " >
+            <thead>
+              <tr className='table-dark'>
+                <th scope="col">Payment ID</th>
+                <th scope="col">Virtual Cart ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Payment Date</th>
+                <th scope="col">Payment Time</th>
+                <th scope="col">Total Payment</th>
+                {/* <th scope="col">Date of Birth</th>
+                <th scope="col">Actions</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {recentPayments.map((payment) => {
+                const dob = new Date(payment.pay_time);
+                const formattedDate = dob.toLocaleDateString();
+                const time = new Date(payment.pay_time)
+                const formattedTime = time.toLocaleTimeString();
+
+                return (
+                  <tr key={payment.pay_id}>
+                    <td>{payment.pay_id}</td>
+                    <td>{payment.vc_id}</td>
+                    <td>{payment.cname}</td>
+                    <td>{formattedDate}</td>
+                    <td>{formattedTime}</td>
+                    <td>{payment.total_pay}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
         <div className='AdminCardsRight'>
           <Card sx={{ maxWidth: 345, minWidth: 250 }} style={{ marginRight: '10px', borderRadius: 20, marginBottom: 20 }}>
             <CardActionArea>
@@ -128,14 +174,14 @@ function AdminHome() {
                 <h4>Popular Products</h4>
                 <div className="RightCardsHead">
                   <p>Products</p>
-                  <p>Earnings</p>
+                  {/* <p>Earnings</p> */}
                 </div>
                 <div className="PopProducts">
                   <div className="PopProducts">
                     {popProducts.map((product) => (
                       <div key={product.pid} className="PopProd">
                         <p>{product.pname}</p>
-                        <p>&#x20B9;{product.earnings}</p>
+                        {/* <p>&#x20B9;{product.earnings}</p> */}
                       </div>
                     ))}
                   </div>

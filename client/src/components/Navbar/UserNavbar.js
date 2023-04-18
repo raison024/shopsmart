@@ -20,6 +20,10 @@ function UserNavbar() {
     navigate("/history", { state: { userEmail: (state.userEmail), userId: userid } });
   }
 
+  function feedclick() {
+    navigate("/feedback", { state: { userEmail: (state.userEmail), userId: userid } });
+  }
+
   useEffect(() => {
     //  getusername();
     Axios.post('http://localhost:3002/api/getusername', { email: state.userEmail })
@@ -58,9 +62,9 @@ function UserNavbar() {
         </div>
         |
         <div className='Navbar-linkscontainer'>
-          <a style={{ color: 'black' }} onClick={accountclick}>Account</a>
+          {/* <a style={{ color: 'black' }} onClick={accountclick}>Account</a> */}
           <a style={{ color: 'black' }} onClick={histclick}>History</a>
-          <a style={{ color: 'black' }} href="http://" target="_blank" rel="noopener noreferrer">Contact</a>
+          <a style={{ color: 'black' }} onClick={feedclick}>Feedback</a>
         </div>
       </div>
 

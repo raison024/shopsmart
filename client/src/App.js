@@ -19,6 +19,8 @@ import Categories from '../src/pages/Admin/Categories';
 import Feedbacks from './pages/Admin/Feedback';
 import Account from './pages/User/Account';
 import History from './pages/User/History';
+import Feedback from './pages/User/Feedback';
+import ProductDetails from './pages/User/ProductDetails';
 
 
 export default function App() {
@@ -33,6 +35,8 @@ export default function App() {
         <Route path="/scan" element={<Scan />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/history" element={<History />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/productdetails" element={<ProductDetails/>} />
         
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/adminhome" element={<AdminHome/>}/>

@@ -88,9 +88,9 @@ function UserHome() {
         <img src={Poster} width='100%' className='User-poster'></img>
         <p style={{ display: 'none' }}>{num}</p>
         <h4 style={{ margin: '0' }}><br />All Products</h4>
-        <p>{email}</p>
+        {/* <p>{email}</p>
         <p>{name}</p>
-        <p>{userid}</p>
+        <p>{userid}</p> */}
         <br />
         <div className='User-grid'>
 
