@@ -14,12 +14,18 @@ import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import QRCode from "qrcode.react";
 import Axios from 'axios'
-import { alignProperty } from '@mui/material/styles/cssUtils';
+import ReactPaginate from 'react-paginate';
 
 
 function Products() {
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 7; // Number of items to show per page
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  function handlePageChange({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
 
   const handleMapLoad = () => {
     setTimeout(() => {
@@ -54,7 +60,7 @@ function Products() {
     height: 400,
     display: 'flex',
     flexDirection: 'column',
-    alignItems:'center'
+    alignItems: 'center'
   };
 
   const [open, setOpen] = React.useState(false);
@@ -96,6 +102,8 @@ function Products() {
   }, []);
 
   const navigate = useNavigate();
+  const offset = currentPage * itemsPerPage;
+  const currentPageItems = product.slice(offset, offset + itemsPerPage);
 
   function handleDelete(pid) {
     console.log("Product id : " + pid)
@@ -133,12 +141,14 @@ function Products() {
       <SideBar />
 
       <div class="AdminStores-container">
-
         <>
 
           <div className='p-3' >
-            <div className='add_btn mt-2 p-2'>
+            <div className='add_btn mt-2 p-2' style={{display:'flex',flexDirection:'row',justifyContent:'left'}}>
               <button className='btn btn-primary mt-2' onClick={gotoadd}>Add Product</button>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' ,marginLeft:400}}>
+                <h3>Products</h3>
+              </div>
 
             </div>
             <table className="table table-hover mt-2 table-bordered" >
@@ -173,7 +183,7 @@ function Products() {
 
             </tr> */}
                 {
-                  product.map((data) => (
+                  currentPageItems.map((data) => (
                     <tr key={data.pid}>
                       <td>{data.pid}</td>
                       <td>{data.pname}</td>
@@ -215,8 +225,8 @@ function Products() {
                               level={"H"}
                               includeMargin={true}
                             />
-                            <button className='btn'style={{backgroundColor:'rgb(21, 101, 192)',color:'white', borderStyle:'none'}}>
-                            <a onClick={downloadQR}> Download QR </a>
+                            <button className='btn' style={{ backgroundColor: 'rgb(21, 101, 192)', color: 'white', borderStyle: 'none' }}>
+                              <a onClick={downloadQR}> Download QR </a>
                             </button>
                           </Box>
                         </Modal>
@@ -228,6 +238,14 @@ function Products() {
                 }
               </tbody>
             </table>
+            <ReactPaginate
+              pageCount={Math.ceil(product.length / itemsPerPage)}
+              pageRangeDisplayed={10}
+              marginPagesDisplayed={7}
+              onPageChange={handlePageChange}
+              containerClassName={'pagination'}
+              activeClassName={'active'}
+            />
           </div>
 
         </>

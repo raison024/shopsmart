@@ -7,17 +7,32 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json())
 
+// // Route for creating a user
+// app.post('/api/createuser', (req, res) => {
+
+//     const name = req.body.name;
+//     const email = req.body.email;
+//     const password = req.body.password;
+
+//     db.query("INSERT INTO customers (cid, cname, cemail, cpass, cphone, gender, DOB) VALUES (NULL,?,?,?)", [name, email, password], (err, result) => {
+//         if (err) {
+//             console.log(err)
+//         }
+//         console.log(result)
+//     });
+// })
+
 // Route for creating a user
 app.post('/api/createuser', (req, res) => {
 
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+    const { userName, email, password, mobile, gender, dob } = req.body;
+    const cusDetails = [userName, email, password, mobile, gender, dob];
 
-    db.query("INSERT INTO customers (cid, cname, cemail, cpass, cphone, gender, DOB) VALUES (NULL,?,?,?)", [name, email, password], (err, result) => {
+    db.query("INSERT INTO customers (cid, cname, cemail, cpass, cphone, gender, DOB) VALUES (NULL,?,?,?,?,?,?)", cusDetails, (err, result) => {
         if (err) {
             console.log(err)
         }
+        res.send({success: true});
         console.log(result)
     });
 })
@@ -44,36 +59,63 @@ app.post('/api/loginuser', (req, res) => {
 app.post('/api/getusername', (req, res) => {
     const email = req.body.email;
     db.query("SELECT cname FROM customers WHERE cemail = ?", [email], (err, result) => {
-      if (err) {
-        res.send({ error: err });
-      } else {
-        res.send(result[0]);
-        console.log(result[0])
-      }
+        if (err) {
+            res.send({ error: err });
+        } else {
+            res.send(result[0]);
+            console.log(result[0])
+        }
     });
-  });
+});
 
 //Route to get userid from email
 app.post('/api/getuserid', (req, res) => {
     const email = req.body.email;
     db.query("SELECT cid FROM customers WHERE cemail = ?", [email], (err, result) => {
-      if (err) {
-        res.send({ error: err });
-      } else {
-        res.send(result[0]);
-        console.log(result[0])
-      }
+        if (err) {
+            res.send({ error: err });
+        } else {
+            res.send(result[0]);
+            console.log(result[0])
+        }
     });
-  });
+});
+
+//Route to get full user info
+app.get('/api/getuserinfo', (req, res) => {
+    const cid = req.body.cid;
+    db.query("SELECT * FROM customers WHERE cid = ?", [cid], (err, result) => {
+        if (err) {
+            res.send({ error: err });
+        } else {
+            res.send(result);
+        }
+    });
+});
 
 // Route to get all products
-app.get("/api/getallproducts", (req,res)=>{
-    db.query("SELECT * FROM products", (err,result)=>{
-        if(err) {
-        console.log(err)
-        } 
-    res.send(result)
-    });   });
+app.post("/api/getuserhistory", (req, res) => {
+    const cid = req.body.cid;
+    db.query("SELECT * FROM payment WHERE cid = ?", [cid], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+            console.log(result)
+        }
+    });
+});
+
+// Route to get all products
+app.get("/api/getallproducts", (req, res) => {
+    db.query("SELECT * FROM products", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
 
 
 // Route to check product for cart
@@ -95,7 +137,7 @@ app.post('/api/getname', (req, res) => {
 });
 
 // app.post("/api/getname", (req, res) =>  {
-    
+
 //     const name = req.body.name;
 
 //     db.query("SELECT pname FROM products WHERE pid ?", [name], (err, result) => {
@@ -138,8 +180,8 @@ app.post("/api/getcartitems", (req, res) => {
     });
 });
 
-app.post("/api/gettotalcartprice", (req, res) =>  {
-    
+app.post("/api/gettotalcartprice", (req, res) => {
+
     const vid = req.body.vid;
     const cid = req.body.cid;
 
@@ -148,7 +190,7 @@ app.post("/api/gettotalcartprice", (req, res) =>  {
             console.log(err)
         }
         console.log(result);
-        console.log("this is vid"+vid)
+        console.log("this is vid" + vid)
         res.send(result);
     });
 });
@@ -167,13 +209,13 @@ app.post("/api/gettotalcartprice", (req, res) =>  {
 
 
 //Route to delete all cart items
-app.post("/api/deleteallcartitems", (req,res) => {
-    
+app.post("/api/deleteallcartitems", (req, res) => {
+
     const vid = req.body.vid;
     const cid = req.body.cid;
 
     db.query("DELETE FROM virtual_cart where vc_id=? AND cid=?", [vid, cid], (err, result) => {
-        if(err) {
+        if (err) {
             console.log(err)
         }
         res.send(result)
@@ -187,7 +229,7 @@ app.post('/api/createpayment', (req, res) => {
     const total = req.body.total;
     const vid = req.body.vid;
 
-    db.query("INSERT INTO payment (pay_id, cid, total_pay, vc_id, pay_time) VALUES (NULL,?,?,?,NULL)", [cid,total,vid], (err, result) => {
+    db.query("INSERT INTO payment (pay_id, cid, total_pay, vc_id, pay_time) VALUES (NULL,?,?,?,NULL)", [cid, total, vid], (err, result) => {
         if (err) {
             console.log(err)
         }

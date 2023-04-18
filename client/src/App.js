@@ -17,6 +17,8 @@ import AddProduct from './pages/Admin/AddProduct';
 import UpdateProduct from './pages/Admin/UpdateProduct';
 import Categories from '../src/pages/Admin/Categories';
 import Feedbacks from './pages/Admin/Feedback';
+import Account from './pages/User/Account';
+import History from './pages/User/History';
 
 
 export default function App() {
@@ -27,8 +29,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<UserHome />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/scan" element={<Scan />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/history" element={<History />} />
         
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/adminhome" element={<AdminHome/>}/>

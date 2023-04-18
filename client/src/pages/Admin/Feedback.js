@@ -24,6 +24,9 @@ function Feedbacks() {
             <SideBar />
             <div className='AdminStores-container'>
                 <div className='feedback-container'>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                        <h3>Feedbacks</h3>
+                    </div>
                     <table className="table table-hover mt-3 table-bordered ">
                         <thead>
                             <tr className='table-dark'>

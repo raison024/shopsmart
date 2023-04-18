@@ -139,15 +139,13 @@ function Cart() {
             <div>
               <p>Total Items</p>
               <p>Amount to be paid</p>
-              <p style={{ fontWeight: 'bold', color: '#1565c0' }}>View Bill</p>
+              {/* <p style={{ fontWeight: 'bold', color: '#1565c0' }}>View Bill</p> */}
             </div>
             <div>
               <p>{prodList.length}</p>
               {/* <p>299</p> */}
               <p>{totalprice}</p>
 
-
-              <p>Proceed</p>
             </div>
           </div>
 

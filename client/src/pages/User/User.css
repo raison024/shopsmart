@@ -132,3 +132,17 @@
 .Cart-fab{
     margin: 0px;
 }
+
+.User-paylist{
+    background-color: white;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    padding-block: 10px;
+    margin-block: 10px;
+    border-radius: 10px;
+}
+.User-paylist p{
+    margin: 0;
+    margin-left: 20px;
+}
